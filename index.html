@@ -6,16 +6,16 @@
   <title>Reaction Physio</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-
+ 
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: #E1F5EE;
+      background: #EBF4FB;
       min-height: 100vh;
       display: flex;
       justify-content: center;
       padding: 2.5rem 1rem 3rem;
     }
-
+ 
     .container {
       width: 100%;
       max-width: 440px;
@@ -24,20 +24,20 @@
       align-items: center;
       gap: 14px;
     }
-
+ 
     /* ---- Avatar ---- */
     .avatar {
       width: 96px;
       height: 96px;
       border-radius: 50%;
-      background: #0F6E56;
-      border: 3px solid #1D9E75;
+      background: #185FA5;
+      border: 3px solid #378ADD;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 30px;
       font-weight: 600;
-      color: #E1F5EE;
+      color: #EBF4FB;
       overflow: hidden;
     }
     .avatar img {
@@ -45,37 +45,37 @@
       height: 100%;
       object-fit: cover;
     }
-
+ 
     /* ---- Name / tagline ---- */
     .name {
       font-size: 22px;
       font-weight: 600;
-      color: #085041;
+      color: #0C447C;
       text-align: center;
     }
     .tagline {
       font-size: 13px;
-      color: #0F6E56;
+      color: #185FA5;
       text-align: center;
     }
-
+ 
     /* ---- Section label ---- */
     .section-label {
       font-size: 11px;
       font-weight: 600;
-      color: #0F6E56;
+      color: #185FA5;
       text-transform: uppercase;
       letter-spacing: 0.08em;
       align-self: flex-start;
       padding-left: 4px;
       margin-top: 6px;
     }
-
+ 
     /* ---- Link card ---- */
     .link-card {
       width: 100%;
       background: #ffffff;
-      border: 0.5px solid #9FE1CB;
+      border: 0.5px solid #85B7EB;
       border-radius: 14px;
       padding: 14px 18px;
       display: flex;
@@ -84,9 +84,9 @@
       text-decoration: none;
       transition: background 0.15s, transform 0.1s;
     }
-    .link-card:hover { background: #f0fdf8; }
+    .link-card:hover { background: #f0f6fd; }
     .link-card:active { transform: scale(0.98); }
-
+ 
     .link-icon {
       width: 44px;
       height: 44px;
@@ -107,25 +107,25 @@
     .link-icon.maps svg { color: #3B6D11; }
     .link-icon.phone { background: #EEEDFE; }
     .link-icon.phone svg { color: #534AB7; }
-
+ 
     .link-text { flex: 1; }
     .link-title {
       font-size: 14px;
       font-weight: 600;
-      color: #085041;
+      color: #0C447C;
     }
     .link-sub {
       font-size: 12px;
-      color: #0F6E56;
+      color: #185FA5;
       margin-top: 1px;
     }
-
+ 
     .link-arrow {
-      color: #9FE1CB;
+      color: #85B7EB;
       flex-shrink: 0;
     }
     .link-arrow svg { width: 18px; height: 18px; }
-
+ 
     /* ---- Carousel ---- */
     .carousel-wrap {
       width: 100%;
@@ -144,7 +144,7 @@
     .carousel-slide {
       flex: 0 0 calc((100% - 12px) / 3);
       aspect-ratio: 1;
-      background: #9FE1CB;
+      background: #85B7EB;
       overflow: hidden;
       border-radius: 10px;
     }
@@ -160,7 +160,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #085041;
+      color: #0C447C;
       font-size: 13px;
       text-align: center;
       padding: 6px;
@@ -173,7 +173,7 @@
       height: 34px;
       border-radius: 50%;
       background: #ffffff;
-      border: 0.5px solid #9FE1CB;
+      border: 0.5px solid #85B7EB;
       cursor: pointer;
       display: flex;
       align-items: center;
@@ -181,8 +181,8 @@
       z-index: 2;
       transition: background 0.15s;
     }
-    .carousel-btn:hover { background: #f0fdf8; }
-    .carousel-btn svg { width: 16px; height: 16px; color: #0F6E56; }
+    .carousel-btn:hover { background: #f0f6fd; }
+    .carousel-btn svg { width: 16px; height: 16px; color: #185FA5; }
     .carousel-btn.prev { left: -14px; }
     .carousel-btn.next { right: -14px; }
     .carousel-dots {
@@ -195,15 +195,15 @@
       width: 6px;
       height: 6px;
       border-radius: 50%;
-      background: #9FE1CB;
+      background: #85B7EB;
       cursor: pointer;
       transition: background 0.2s, transform 0.2s;
     }
     .carousel-dot.active {
-      background: #0F6E56;
+      background: #185FA5;
       transform: scale(1.3);
     }
-
+ 
     /* ---- Lightbox ---- */
     .lightbox {
       display: none;
@@ -238,18 +238,18 @@
     }
     .lightbox-close svg { width: 20px; height: 20px; }
     .carousel-slide { cursor: pointer; }
-
+ 
     /* ---- Divider ---- */
     .divider {
       width: 100%;
       height: 0.5px;
-      background: #9FE1CB;
+      background: #85B7EB;
     }
-
+ 
     /* ---- Footer ---- */
     .footer {
       font-size: 11px;
-      color: #0F6E56;
+      color: #185FA5;
       margin-top: 8px;
       text-align: center;
     }
@@ -259,7 +259,7 @@
   <div class="container">
 
     <!-- AVATAR: αντικατέστησε το "RP" με <img src="logo.jpg" alt="Reaction Physio"> αν έχεις logo -->
-    <div class="avatar">RP</div>
+    <div class="avatar"><img src="./images/logo.jpg" alt="Reaction Physio"></div>
 
     <p class="name">Reaction Physio</p>
     <p class="tagline">Φυσιοθεραπεία &bull; Αποκατάσταση &bull; Ευεξία</p>
@@ -269,7 +269,7 @@
     <p class="section-label">Ακολούθησέ μας</p>
 
     <!-- INSTAGRAM: άλλαξε το href με το link του προφίλ σου -->
-    <a class="link-card" href="https://instagram.com/ΒΑΛΕ_ΤΟ_USERNAME_ΣΟΥ" target="_blank" rel="noopener">
+    <a class="link-card" href="https://instagram.com/reaction_physio" target="_blank" rel="noopener">
       <div class="link-icon ig">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
           <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>

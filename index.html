@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reaction Physio</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #E1F5EE;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      padding: 2.5rem 1rem 3rem;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 440px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+    }
+
+    /* ---- Avatar ---- */
+    .avatar {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      background: #0F6E56;
+      border: 3px solid #1D9E75;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+      font-weight: 600;
+      color: #E1F5EE;
+      overflow: hidden;
+    }
+    .avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* ---- Name / tagline ---- */
+    .name {
+      font-size: 22px;
+      font-weight: 600;
+      color: #085041;
+      text-align: center;
+    }
+    .tagline {
+      font-size: 13px;
+      color: #0F6E56;
+      text-align: center;
+    }
+
+    /* ---- Section label ---- */
+    .section-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: #0F6E56;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      align-self: flex-start;
+      padding-left: 4px;
+      margin-top: 6px;
+    }
+
+    /* ---- Link card ---- */
+    .link-card {
+      width: 100%;
+      background: #ffffff;
+      border: 0.5px solid #9FE1CB;
+      border-radius: 14px;
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      text-decoration: none;
+      transition: background 0.15s, transform 0.1s;
+    }
+    .link-card:hover { background: #f0fdf8; }
+    .link-card:active { transform: scale(0.98); }
+
+    .link-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .link-icon svg { width: 22px; height: 22px; }
+    .link-icon.ig { background: #FBEAF0; }
+    .link-icon.ig svg { color: #993556; }
+    .link-icon.fb { background: #E6F1FB; }
+    .link-icon.fb svg { color: #185FA5; }
+    .link-icon.photos { background: #FAEEDA; }
+    .link-icon.photos svg { color: #854F0B; }
+    .link-icon.maps { background: #EAF3DE; }
+    .link-icon.maps svg { color: #3B6D11; }
+    .link-icon.phone { background: #EEEDFE; }
+    .link-icon.phone svg { color: #534AB7; }
+
+    .link-text { flex: 1; }
+    .link-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #085041;
+    }
+    .link-sub {
+      font-size: 12px;
+      color: #0F6E56;
+      margin-top: 1px;
+    }
+
+    .link-arrow {
+      color: #9FE1CB;
+      flex-shrink: 0;
+    }
+    .link-arrow svg { width: 18px; height: 18px; }
+
+    /* ---- Carousel ---- */
+    .carousel-wrap {
+      width: 100%;
+      position: relative;
+    }
+    .carousel-track-outer {
+      width: 100%;
+      overflow: hidden;
+      border-radius: 14px;
+    }
+    .carousel-track {
+      display: flex;
+      transition: transform 0.35s ease;
+      gap: 6px;
+    }
+    .carousel-slide {
+      flex: 0 0 calc((100% - 12px) / 3);
+      aspect-ratio: 1;
+      background: #9FE1CB;
+      overflow: hidden;
+      border-radius: 10px;
+    }
+    .carousel-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .carousel-slide .photo-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #085041;
+      font-size: 13px;
+      text-align: center;
+      padding: 6px;
+    }
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: #ffffff;
+      border: 0.5px solid #9FE1CB;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+      transition: background 0.15s;
+    }
+    .carousel-btn:hover { background: #f0fdf8; }
+    .carousel-btn svg { width: 16px; height: 16px; color: #0F6E56; }
+    .carousel-btn.prev { left: -14px; }
+    .carousel-btn.next { right: -14px; }
+    .carousel-dots {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 8px;
+    }
+    .carousel-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #9FE1CB;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .carousel-dot.active {
+      background: #0F6E56;
+      transform: scale(1.3);
+    }
+
+    /* ---- Lightbox ---- */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.85);
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox img {
+      max-width: 92vw;
+      max-height: 88vh;
+      border-radius: 10px;
+      object-fit: contain;
+    }
+    .lightbox-close {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.15);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+    }
+    .lightbox-close svg { width: 20px; height: 20px; }
+    .carousel-slide { cursor: pointer; }
+
+    /* ---- Divider ---- */
+    .divider {
+      width: 100%;
+      height: 0.5px;
+      background: #9FE1CB;
+    }
+
+    /* ---- Footer ---- */
+    .footer {
+      font-size: 11px;
+      color: #0F6E56;
+      margin-top: 8px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- AVATAR: αντικατέστησε το "RP" με <img src="logo.jpg" alt="Reaction Physio"> αν έχεις logo -->
+    <div class="avatar">RP</div>
+
+    <p class="name">Reaction Physio</p>
+    <p class="tagline">Φυσιοθεραπεία &bull; Αποκατάσταση &bull; Ευεξία</p>
+
+    <div style="height:4px"></div>
+
+    <p class="section-label">Ακολούθησέ μας</p>
+
+    <!-- INSTAGRAM: άλλαξε το href με το link του προφίλ σου -->
+    <a class="link-card" href="https://instagram.com/ΒΑΛΕ_ΤΟ_USERNAME_ΣΟΥ" target="_blank" rel="noopener">
+      <div class="link-icon ig">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+          <circle cx="12" cy="12" r="4.5"/>
+          <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/>
+        </svg>
+      </div>
+      <div class="link-text">
+        <div class="link-title">Instagram</div>
+        <div class="link-sub">@reactionphysio</div>
+      </div>
+      <div class="link-arrow">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </div>
+    </a>
+
+    <!-- FACEBOOK: άλλαξε το href με το link της σελίδας σου -->
+    <a class="link-card" href="https://facebook.com/ΒΑΛΕ_ΤΟ_LINK_ΣΟΥ" target="_blank" rel="noopener">
+      <div class="link-icon fb">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+        </svg>
+      </div>
+      <div class="link-text">
+        <div class="link-title">Facebook</div>
+        <div class="link-sub">Reaction Physio</div>
+      </div>
+      <div class="link-arrow">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </div>
+    </a>
+
+    <div class="divider"></div>
+    <p class="section-label">Ο χώρος μας</p>
+
+    <!-- ΦΩΤΟΓΡΑΦΙΕΣ CAROUSEL
+         Για να προσθέσεις φωτογραφία: αντέγραψε ένα <div class="carousel-slide">...</div>
+         και άλλαξε το src. Μπορείς να βάλεις όσες θέλεις. -->
+    <div class="carousel-wrap" id="carousel">
+      <div class="carousel-track-outer">
+        <div class="carousel-track" id="carouselTrack">
+
+          <div class="carousel-slide">
+            <img src="https://picsum.photos/seed/physio1/400/400" alt="Χώρος 1">
+          </div>
+          <div class="carousel-slide">
+            <img src="https://picsum.photos/seed/physio2/400/400" alt="Χώρος 2">
+          </div>
+          <div class="carousel-slide">
+            <img src="https://picsum.photos/seed/physio3/400/400" alt="Χώρος 3">
+          </div>
+          <div class="carousel-slide">
+            <img src="https://picsum.photos/seed/physio4/400/400" alt="Χώρος 4">
+          </div>
+          <div class="carousel-slide">
+            <img src="https://picsum.photos/seed/physio5/400/400" alt="Χώρος 5">
+          </div>
+          <div class="carousel-slide">
+            <img src="https://picsum.photos/seed/physio6/400/400" alt="Χώρος 6">
+          </div>
+          <!-- Πρόσθεσε εδώ περισσότερες φωτογραφίες αν θέλεις -->
+
+        </div>
+      </div>
+
+      <button class="carousel-btn prev" id="prevBtn" aria-label="Προηγούμενη">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M15 18l-6-6 6-6"/>
+        </svg>
+      </button>
+      <button class="carousel-btn next" id="nextBtn" aria-label="Επόμενη">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 18l6-6-6-6"/>
+        </svg>
+      </button>
+    </div>
+    <div class="carousel-dots" id="carouselDots"></div>
+
+    <!-- GOOGLE PHOTOS: άλλαξε το href με το shared album σου -->
+    <a class="link-card" href="https://photos.google.com/ΒΑΛΕ_ΤΟ_ALBUM_LINK" target="_blank" rel="noopener">
+      <div class="link-icon photos">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="18" height="18" rx="2"/>
+          <circle cx="8.5" cy="8.5" r="1.5"/>
+          <path d="M21 15l-5-5L5 21"/>
+        </svg>
+      </div>
+      <div class="link-text">
+        <div class="link-title">Φωτογραφίες χώρου</div>
+        <div class="link-sub">Δες το φυσιοθεραπευτήριό μας</div>
+      </div>
+      <div class="link-arrow">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </div>
+    </a>
+
+    <!-- GOOGLE MAPS: άλλαξε το href με το link της τοποθεσίας σου -->
+    <a class="link-card" href="https://maps.google.com/?q=ΒΑΛΕ+ΤΗΝ+ΔΙΕΥΘΥΝΣΗ+ΣΟΥ" target="_blank" rel="noopener">
+      <div class="link-icon maps">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+          <circle cx="12" cy="10" r="3"/>
+        </svg>
+      </div>
+      <div class="link-text">
+        <div class="link-title">Βρες μας στο χάρτη</div>
+        <div class="link-sub">Google Maps</div>
+      </div>
+      <div class="link-arrow">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </div>
+    </a>
+
+    <!-- ΤΗΛΕΦΩΝΟ (προαιρετικό): άλλαξε τον αριθμό -->
+    <a class="link-card" href="tel:+306900000000">
+      <div class="link-icon phone">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.72 12a19.79 19.79 0 0 1-3-8.57A2 2 0 0 1 3.68 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+        </svg>
+      </div>
+      <div class="link-text">
+        <div class="link-title">Κάλεσέ μας</div>
+        <div class="link-sub">+30 690 000 0000</div>
+      </div>
+      <div class="link-arrow">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </div>
+    </a>
+
+    <p class="footer">&copy; 2025 Reaction Physio</p>
+
+  </div>
+
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" id="lightboxClose" aria-label="Κλείσιμο">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 6L6 18M6 6l12 12"/>
+      </svg>
+    </button>
+    <img id="lightboxImg" src="" alt="Φωτογραφία χώρου">
+  </div>
+  <script>
+    const track = document.getElementById('carouselTrack');
+    const dotsContainer = document.getElementById('carouselDots');
+    const slides = track.querySelectorAll('.carousel-slide');
+    const perPage = 3;
+    const total = slides.length;
+    const pages = Math.ceil(total / perPage);
+    let currentPage = 0;
+
+    for (let i = 0; i < pages; i++) {
+      const dot = document.createElement('div');
+      dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+      dot.addEventListener('click', () => goTo(i));
+      dotsContainer.appendChild(dot);
+    }
+
+    function goTo(page) {
+      currentPage = (page + pages) % pages;
+      const slideWidth = slides[0].offsetWidth + 6;
+      track.style.transform = 'translateX(-' + (currentPage * perPage * slideWidth) + 'px)';
+      dotsContainer.querySelectorAll('.carousel-dot').forEach((d, i) => {
+        d.classList.toggle('active', i === currentPage);
+      });
+    }
+
+    document.getElementById('prevBtn').addEventListener('click', () => goTo(currentPage - 1));
+    document.getElementById('nextBtn').addEventListener('click', () => goTo(currentPage + 1));
+
+    let startX = 0;
+    track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
+    track.addEventListener('touchend', e => {
+      const diff = startX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 40) goTo(diff > 0 ? currentPage + 1 : currentPage - 1);
+    });
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+
+    document.querySelectorAll('.carousel-slide').forEach(slide => {
+      slide.addEventListener('click', () => {
+        const img = slide.querySelector('img');
+        if (!img) return;
+        lightboxImg.src = img.src;
+        lightboxImg.alt = img.alt;
+        lightbox.classList.add('open');
+      });
+    });
+
+    document.getElementById('lightboxClose').addEventListener('click', () => lightbox.classList.remove('open'));
+    lightbox.addEventListener('click', e => { if (e.target === lightbox) lightbox.classList.remove('open'); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') lightbox.classList.remove('open'); });
+  </script>
+</body>
+</html>

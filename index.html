@@ -4,257 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="icon" type="image/x-icon" href="./images/logo.jpg">
+  <link rel="stylesheet" href="./style.css">
   <title>Reaction Physio</title>
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
- 
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: #EBF4FB;
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      padding: 2.5rem 1rem 3rem;
-    }
- 
-    .container {
-      width: 100%;
-      max-width: 440px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 14px;
-    }
- 
-    /* ---- Avatar ---- */
-    .avatar {
-      width: 96px;
-      height: 96px;
-      border-radius: 50%;
-      background: #185FA5;
-      border: 3px solid #378ADD;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 30px;
-      font-weight: 600;
-      color: #EBF4FB;
-      overflow: hidden;
-    }
-    .avatar img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
- 
-    /* ---- Name / tagline ---- */
-    .name {
-      font-size: 22px;
-      font-weight: 600;
-      color: #0C447C;
-      text-align: center;
-    }
-    .tagline {
-      font-size: 13px;
-      color: #185FA5;
-      text-align: center;
-    }
- 
-    /* ---- Section label ---- */
-    .section-label {
-      font-size: 11px;
-      font-weight: 600;
-      color: #185FA5;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      align-self: flex-start;
-      padding-left: 4px;
-      margin-top: 6px;
-    }
- 
-    /* ---- Link card ---- */
-    .link-card {
-      width: 100%;
-      background: #ffffff;
-      border: 0.5px solid #85B7EB;
-      border-radius: 14px;
-      padding: 14px 18px;
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      text-decoration: none;
-      transition: background 0.15s, transform 0.1s;
-    }
-    .link-card:hover { background: #f0f6fd; }
-    .link-card:active { transform: scale(0.98); }
- 
-    .link-icon {
-      width: 44px;
-      height: 44px;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-    .link-icon svg { width: 22px; height: 22px; }
-    .link-icon.ig { background: #FBEAF0; }
-    .link-icon.ig svg { color: #993556; }
-    .link-icon.fb { background: #E6F1FB; }
-    .link-icon.fb svg { color: #185FA5; }
-    .link-icon.photos { background: #FAEEDA; }
-    .link-icon.photos svg { color: #854F0B; }
-    .link-icon.maps { background: #EAF3DE; }
-    .link-icon.maps svg { color: #3B6D11; }
-    .link-icon.phone { background: #EEEDFE; }
-    .link-icon.phone svg { color: #534AB7; }
- 
-    .link-text { flex: 1; }
-    .link-title {
-      font-size: 14px;
-      font-weight: 600;
-      color: #0C447C;
-    }
-    .link-sub {
-      font-size: 12px;
-      color: #185FA5;
-      margin-top: 1px;
-    }
- 
-    .link-arrow {
-      color: #85B7EB;
-      flex-shrink: 0;
-    }
-    .link-arrow svg { width: 18px; height: 18px; }
- 
-    /* ---- Carousel ---- */
-    .carousel-wrap {
-      width: 100%;
-      position: relative;
-    }
-    .carousel-track-outer {
-      width: 100%;
-      overflow: hidden;
-      border-radius: 14px;
-    }
-    .carousel-track {
-      display: flex;
-      transition: transform 0.35s ease;
-      gap: 6px;
-    }
-    .carousel-slide {
-      flex: 0 0 calc((100% - 12px) / 3);
-      aspect-ratio: 1;
-      background: #85B7EB;
-      overflow: hidden;
-      border-radius: 10px;
-    }
-    .carousel-slide img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-    .carousel-slide .photo-placeholder {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #0C447C;
-      font-size: 13px;
-      text-align: center;
-      padding: 6px;
-    }
-    .carousel-btn {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 34px;
-      height: 34px;
-      border-radius: 50%;
-      background: #ffffff;
-      border: 0.5px solid #85B7EB;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 2;
-      transition: background 0.15s;
-    }
-    .carousel-btn:hover { background: #f0f6fd; }
-    .carousel-btn svg { width: 16px; height: 16px; color: #185FA5; }
-    .carousel-btn.prev { left: -14px; }
-    .carousel-btn.next { right: -14px; }
-    .carousel-dots {
-      display: flex;
-      justify-content: center;
-      gap: 6px;
-      margin-top: 8px;
-    }
-    .carousel-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: #85B7EB;
-      cursor: pointer;
-      transition: background 0.2s, transform 0.2s;
-    }
-    .carousel-dot.active {
-      background: #185FA5;
-      transform: scale(1.3);
-    }
- 
-    /* ---- Lightbox ---- */
-    .lightbox {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.85);
-      z-index: 100;
-      align-items: center;
-      justify-content: center;
-    }
-    .lightbox.open { display: flex; }
-    .lightbox img {
-      max-width: 92vw;
-      max-height: 88vh;
-      border-radius: 10px;
-      object-fit: contain;
-    }
-    .lightbox-close {
-      position: fixed;
-      top: 16px;
-      right: 16px;
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.15);
-      border: none;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #fff;
-    }
-    .lightbox-close svg { width: 20px; height: 20px; }
-    .carousel-slide { cursor: pointer; }
- 
-    /* ---- Divider ---- */
-    .divider {
-      width: 100%;
-      height: 0.5px;
-      background: #85B7EB;
-    }
- 
-    /* ---- Footer ---- */
-    .footer {
-      font-size: 11px;
-      color: #185FA5;
-      margin-top: 8px;
-      text-align: center;
-    }
-  </style>
 </head>
 <body>
   <div class="container">
@@ -290,7 +41,7 @@
     </a>
 
     <!-- FACEBOOK: άλλαξε το href με το link της σελίδας σου -->
-    <a class="link-card" href="https://facebook.com/ΒΑΛΕ_ΤΟ_LINK_ΣΟΥ" target="_blank" rel="noopener">
+    <a class="link-card" href="https://facebook.com/profile.php?id=61590438599558" target="_blank" rel="noopener">
       <div class="link-icon fb">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
           <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
@@ -353,7 +104,7 @@
     </div>
     <div class="carousel-dots" id="carouselDots"></div>
 
-    <!-- GOOGLE PHOTOS: άλλαξε το href με το shared album σου -->
+    <!-- GOOGLE PHOTOS: άλλαξε το href με το shared album σου 
     <a class="link-card" href="https://photos.google.com/ΒΑΛΕ_ΤΟ_ALBUM_LINK" target="_blank" rel="noopener">
       <div class="link-icon photos">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -371,10 +122,10 @@
           <path d="M5 12h14M12 5l7 7-7 7"/>
         </svg>
       </div>
-    </a>
+    </a>-->
 
     <!-- GOOGLE MAPS: άλλαξε το href με το link της τοποθεσίας σου -->
-    <a class="link-card" href="https://maps.google.com/?q=ΒΑΛΕ+ΤΗΝ+ΔΙΕΥΘΥΝΣΗ+ΣΟΥ" target="_blank" rel="noopener">
+    <a class="link-card" href="https://maps.google.com/?q=Ομήρων+6,+Σέρρες+621+21" target="_blank" rel="noopener">
       <div class="link-icon maps">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
           <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
@@ -392,16 +143,17 @@
       </div>
     </a>
 
+    <p class="section-label">Επικοινωνήστε μαζί μας</p>
     <!-- ΤΗΛΕΦΩΝΟ (προαιρετικό): άλλαξε τον αριθμό -->
-    <a class="link-card" href="tel:+306900000000">
+    <a class="link-card" href="tel:+306940277934">
       <div class="link-icon phone">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
           <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.72 12a19.79 19.79 0 0 1-3-8.57A2 2 0 0 1 3.68 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
         </svg>
       </div>
       <div class="link-text">
-        <div class="link-title">Κάλεσέ μας</div>
-        <div class="link-sub">+30 690 000 0000</div>
+        <div class="link-title">Κινητό</div>
+        <div class="link-sub">+30 6940277934</div>
       </div>
       <div class="link-arrow">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -410,7 +162,43 @@
       </div>
     </a>
 
-    <p class="footer">&copy; 2025 Reaction Physio</p>
+    <a class="link-card" href="tel:2321068793">
+      <div class="link-icon phone">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.72 12a19.79 19.79 0 0 1-3-8.57A2 2 0 0 1 3.68 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+        </svg>
+      </div>
+      <div class="link-text">
+        <div class="link-title">Σταθερό</div>
+        <div class="link-sub">2321068793</div>
+      </div>
+      <div class="link-arrow">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </div>
+    </a>
+
+    <!-- EMAIL: άλλαξε το href με το email σου -->
+    <a class="link-card" href="mailto:reaction.physiotherapy@gmail.com">
+      <div class="link-icon email">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+          <polyline points="22,6 12,13 2,6"/>
+        </svg>
+      </div>
+      <div class="link-text">
+        <div class="link-title">Email</div>
+        <div class="link-sub">reaction.physiotherapy@gmail.com</div>
+      </div>
+      <div class="link-arrow">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </div>
+    </a>
+
+    <p class="footer">&copy; 2026 Reaction Physio</p>
 
   </div>
 
